@@ -1,19 +1,20 @@
 const express = require('express')
 const dotenv = require('dotenv')
-
+const connectDB =require('./config/db')
 
 dotenv.config({ path:'./config/.env'})
+
+//connectDB
+connectDB();
+
+const home = require('./Routes/homeRoutes')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(express.json());
 
 //Routes
-app.get('/', (req, res) => {
-    res.send('Connect to kimte!');
-  });
+app.use('/api/v1/home',home);
 
 
 app.listen(PORT,
